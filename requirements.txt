@@ -38,7 +38,6 @@ reportlab==3.3.0
 requests==2.18.4
 six==1.11.0
 SQLAlchemy==1.2.2
-system-service==0.3
 ubuntu-drivers-common==0.0.0
 ufw==0.35
 unattended-upgrades==0.1
