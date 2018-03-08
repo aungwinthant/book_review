@@ -1,0 +1,5 @@
+.vscode
+flask_sessions
+__pycache__
+config.js
+config.py

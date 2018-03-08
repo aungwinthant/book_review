@@ -1,0 +1,47 @@
+body{
+    background:url("../images/background.png") center no-repeat;
+    background-size: cover;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.input-groups{
+    width:500px;
+    margin:100px auto;
+    color:white;
+    padding:20px;
+    background-color:rgb(9, 37, 73);
+    border-radius: 5%;
+}
+.title{
+    margin:0 auto;
+    width:100px;
+    margin-bottom: 20px;
+}
+.register{
+    float:right;
+}
+.global-navigation{
+    background-color:rgb(9, 37, 73);
+    color:white;
+}
+.search>input[type="text"]{
+    width:500px;
+}
+.card-wrapper{
+    overflow: scroll;
+    max-height: 700px;
+    scroll-behavior: auto;
+    width:100%;
+}
+.card{
+    float:left;
+    margin:20px;
+    padding:10px;
+    width:18em !important;
+}
+.card-img-top{
+    max-height:150px;
+    max-width: 100px;
+    margin: 0 auto;
+
+}
