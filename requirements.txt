@@ -13,9 +13,7 @@ MarkupSafe==1.0
 MechanicalSoup==0.9.0.post4
 misaka==2.1.0
 oauthlib==1.0.3
-onboard==1.2.0
 Pillow==3.1.2
-plainbox==0.25
 ptyprocess==0.5
 py-instagram-dl==1.4
 pyasn1==0.1.9
