@@ -25,11 +25,12 @@
                     </div>
             </div>
             <script>
+                    var MY_KEY=config.BOOK_API_KEY
                     $(document).ready(function(){
                             var isbn ="{{book.isbn}}"
                                 $.ajax({
                                     dataType: 'json',
-                                    url: 'https://www.googleapis.com/books/v1/volumes?q=isbn:' + isbn+"&key="+BOOK_API_KEY,
+                                    url: 'https://www.googleapis.com/books/v1/volumes?q=isbn:' + isbn+"&key="+MY_KEY,
                                     success: handleResponse
                                     
                                     });

@@ -5,7 +5,7 @@ from sqlalchemy import create_engine
 from functools import wraps
 from sqlalchemy.orm import scoped_session, sessionmaker
 import requests
-from config.py import DATABASE_URL
+from config import DATABASE_URL
 
 app = Flask(__name__)
 
