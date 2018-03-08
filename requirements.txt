@@ -21,14 +21,11 @@ Mako==1.0.3
 MarkupSafe==1.0
 MechanicalSoup==0.9.0.post4
 oauthlib==1.0.3
-onboard==1.2.0
 padme==1.1.1
 pexpect==4.0.1
-Pillow==3.1.2
 plainbox==0.25
 psycopg2==2.7.4
 ptyprocess==0.5
-py-instagram-dl==1.4
 pyasn1==0.1.9
 pycparser==2.18
 pycups==1.9.73
