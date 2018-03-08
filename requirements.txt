@@ -39,7 +39,6 @@ requests==2.18.4
 six==1.11.0
 SQLAlchemy==1.2.2
 urllib3==1.22
-usb-creator==0.3.0
 Werkzeug==0.14.1
 xdiagnose==3.8.4.1
 xkit==0.0.0
