@@ -7,7 +7,6 @@ def main():
         reader=csv.reader(f)
         next(reader,None)
         for isbn,title,author,year in reader:
-            
             print("adding book isbn = {}  title = {} author = {} year={}".format(isbn,title,author,year))
             db.execute("INSERT INTO books(isbn,title,author,year) VALUES (:isbn,:title,:author,:year)",{"isbn":isbn,"title":title,"author":author,"year":int(year)})
             print("added")

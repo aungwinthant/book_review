@@ -15,13 +15,13 @@
     {%if books%}
     <div class="card-wrapper">
         {%for book in books%}
-            <div class="card col-sm-3 col-md-12" style="width: 20rem;">
+            <div class="item-card card col-sm-3 col-md-12" style="width: 20rem;">
                     <img class="card-img-top" id="{{book.isbn}}" src="..." alt="cover not available">
                     <div class="card-block">
                         <h4 class="card-title">{{book.title}}</h4>
                         <h4 class="isbn">ISBN No :{{book.isbn}}</h4>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Read More</a>
+                        <p class="card-text" id ="{{book.id}}">Cannot find description</p>
+                        <a href="{{url_for('book_detail',isbn=book.isbn)}}" class="btn btn-primary">Read More</a>
                     </div>
             </div>
             <script>
@@ -37,7 +37,9 @@
                                 function handleResponse( response ) {
                                 $.each( response.items, function( i, item ) {
                                     thumb = item.volumeInfo.imageLinks.thumbnail;
+                                    description=item.volumeInfo.description;
                                     $('#{{book.isbn}}').attr('src', thumb);
+                                    $('#{{book.id}}').text(description)
                                 });
                               }
                         })

@@ -1,11 +1,13 @@
 import os
-from flask import Flask, session,render_template,request,flash,redirect,url_for,g
+from flask import Flask, session,render_template,request,flash,redirect,url_for,jsonify
 from flask_session import Session
 from sqlalchemy import create_engine
 from functools import wraps
 from sqlalchemy.orm import scoped_session, sessionmaker
 import requests
-from config import DATABASE_URL
+import json
+from datetime import datetime
+from config import DATABASE_URL,BOOK_READ_API_KEY
 
 app = Flask(__name__)
 
@@ -88,7 +90,44 @@ def books():
         books=db.execute("SELECT * FROM books LIMIT 12")
     return render_template('books.html',books=books)
 
-    
+
+@app.route("/books/<string:isbn>",methods=['GET','POST'])
+@login_required
+def book_detail(isbn):
+    error=""
+    user_id=session["user_id"]
+    books=db.execute("SELECT * FROM books WHERE isbn=:isbn",{'isbn':isbn}).fetchone()
+    book_id=books.id
+    reviews=db.execute("SELECT * FROM reviews WHERE bookid=:bookid and userid=:userid",{"bookid":book_id,"userid":user_id})
+    if request.method=='GET':
+        res = requests.get("https://www.goodreads.com/book/review_counts.json", params={"key": BOOK_READ_API_KEY, "isbns": isbn})
+        return render_template('book_detail.html',response=res.json(),books=books)
+    else:
+        reviewtext=request.form['review']
+        try:
+            review_exist=db.execute("SELECT * FROM reviews WHERE userid=:userid and bookid=:bookid",{"userid":user_id,"bookid":book_id}).fetchone()
+            if review_exist:
+                error="You have already reviewed this book kappa!"
+            else:
+                print("INSERTING REVIEW FOR BOOK ID : {}, USER_ID : {}, REVIEW : {}, REVIEW_DATE : {}".format(book_id,user_id,reviewtext,datetime.now().date()))
+                db.execute("INSERT INTO reviews (userid,bookid,review,review_date) VALUES(:user_id,:book_id,:review_text,:review_date)",{"user_id":user_id,"book_id":book_id,"review_text":reviewtext,"review_date":datetime.now().date()})
+                print("INSERTED")
+                db.commit()
+                flash("REVIEW COMMITTED!")
+        except:
+            error="INSERT ERROR"
+        return render_template('book_detail.html',error=error,books=books)
+
+@app.route("/api/<string:isbn>")
+@login_required
+def book_api(isbn):
+    books=db.execute("SELECT * FROM books WHERE isbn=:isbn",{'isbn':isbn}).fetchone()
+    books_json={}
+    books_json=books
+    if books:
+        return jsonify(books_json)
+    else:
+        return render_template('404.html')
 
 if __name__=="__main__":
     app.run()
